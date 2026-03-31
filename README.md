@@ -1,7 +1,7 @@
-# 🚀 StockSenseAI
+# StockSenseAI
 AI-Powered Inventory Intelligence Platform
 
-## 🧠 Overview
+## Overview
 StockSenseAI is a multi-tenant AI-driven inventory management system designed for small to medium businesses (SMEs).
 It goes beyond traditional inventory systems by integrating:
 
@@ -11,14 +11,14 @@ It goes beyond traditional inventory systems by integrating:
 - ⚡ Real-time alerts
 - 🌐 External market awareness (web scraping)
 
-## 🎯 Problem Statement
+## Problem Statement
 Small businesses often suffer from:
 - Overstock → wasted capital
 - Stockouts → lost sales
 - Poor demand forecasting
 - Lack of actionable insights
 
-## 💡 Solution
+##  Solution
 StockSenseAI provides:
 - AI-powered demand prediction
 - Intelligent restock recommendations
@@ -26,7 +26,7 @@ StockSenseAI provides:
 - Real-time alerts
 - Natural language business insights via AI agents
 
-## 🏗️ System Architecture
+##  System Architecture
 ```
 Frontend (React + Zustand)
          ↓
@@ -43,7 +43,7 @@ Redis (Caching)
 ML Service (Python/FastAPI)
 ```
 
-## 🧩 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React (Vite)
@@ -69,40 +69,40 @@ ML Service (Python/FastAPI)
 - Docker + Docker Compose
 - node-cron (workers)
 
-## 🔑 Core Features
+##  Core Features
 
-### 🏢 Multi-Tenant System
+### Multi-Tenant System
 - Business-level data isolation
 - Role-based access (Owner, Manager, Staff)
 
-### 📦 Inventory Management
+### Inventory Management
 - Product CRUD
 - Stock tracking
 - Inventory logs
 - Low-stock thresholds
 
-### 💰 Sales Tracking
+### Sales Tracking
 - Record transactions
 - Revenue tracking
 - Sales analytics
 
-### 🧠 AI Decision Engine (Mastra)
+### AI Decision Engine (Mastra)
 - Inventory Analyst Agent
 - Restock recommendations
 - Slow-moving detection explanation
 - Business Q&A
 
-### 🔮 Forecasting
+### Forecasting
 - 7-day demand prediction
 - Average daily sales
 - Risk scoring
 
-### 🚨 Alerts System
+### Alerts System
 - Low stock alerts
 - Slow-moving alerts
 - Demand spike alerts
 
-### ⚡ Redis Caching
+### Redis Caching
 - Dashboard caching
 - Product caching
 - Alerts caching
@@ -154,14 +154,14 @@ npm install
 # Terminal 4: cd apps/api && npm run worker
 ```
 
-## 🌐 System URLs
+## System URLs
 - Frontend: http://localhost:5173
 - API: http://localhost:5000
 - Mastra: http://localhost:4111
 - ML Service: http://localhost:8000
 - Prisma Studio: http://localhost:5555
 
-## 🤖 AI Agent Design
+## AI Agent Design
 
 ### Inventory Analyst Agent
 Capabilities:
@@ -170,7 +170,7 @@ Capabilities:
 - Recommend restocking
 - Answer business questions
 
-## 🧠 Data Flow
+## Data Flow
 ```
 User Action → API → PostgreSQL
                      ↓
@@ -185,13 +185,13 @@ User Action → API → PostgreSQL
                  User UI
 ```
 
-## � Security
+## Security
 - JWT Authentication
 - Role-based authorization
 - Business-level data isolation
 - API protection via middleware
 
-## 🚀 Future Enhancements
+## Future Enhancements
 - Multi-branch inventory
 - Supplier integrations
 - Auto purchase orders
@@ -201,17 +201,17 @@ User Action → API → PostgreSQL
 - Web scraping for competitor pricing
 - Supplier monitoring
 
-## 🧠 Vision
+## Vision
 StockSenseAI aims to become:
 **"The AI brain for small business inventory decisions"**
 
-## 👨‍💻 Author
+## Author
 **Arthan Kyle Ydeo**  
 Software Developer | System Architect
 
-## 📜 License
+## License
 MIT License
 
 ---
 
-Built with ❤️ using Mastra, React, Express, and AI
+Built using Mastra, React, Express, and AI
