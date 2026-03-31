@@ -1,18 +1,24 @@
 {
   "name": "stocksenseai",
   "version": "1.0.0",
-  "description": "",
+  "description": "AI-Powered Inventory Intelligence Platform",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "mastra dev",
     "build": "mastra build",
-    "start": "mastra start"
+    "start": "mastra start",
+    "setup": "node scripts/setup.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
+  "keywords": [
+    "inventory",
+    "ai",
+    "mastra",
+    "stock-management",
+    "forecasting"
+  ],
+  "author": "Arthan Kyle Ydeo",
+  "license": "MIT",
   "engines": {
     "node": ">=22.13.0"
   },
