@@ -1,0 +1,161 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Business {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users      User[]
+  products   Product[]
+  sales      Sale[]
+  alerts     Alert[]
+  forecasts  Forecast[]
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  name       String
+  role       Role     @default(STAFF)
+  businessId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  sales    Sale[]
+
+  @@index([businessId])
+}
+
+enum Role {
+  OWNER
+  MANAGER
+  STAFF
+}
+
+model Product {
+  id              String   @id @default(uuid())
+  name            String
+  sku             String
+  category        String
+  currentStock    Int      @default(0)
+  lowStockThreshold Int    @default(10)
+  unitPrice       Float
+  costPrice       Float
+  businessId      String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  business      Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  inventoryLogs InventoryLog[]
+  saleItems     SaleItem[]
+  forecasts     Forecast[]
+
+  @@unique([businessId, sku])
+  @@index([businessId])
+}
+
+model InventoryLog {
+  id         String   @id @default(uuid())
+  productId  String
+  type       LogType
+  quantity   Int
+  reason     String?
+  createdAt  DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+enum LogType {
+  RESTOCK
+  SALE
+  ADJUSTMENT
+  RETURN
+}
+
+model Sale {
+  id         String   @id @default(uuid())
+  businessId String
+  userId     String
+  totalAmount Float
+  createdAt  DateTime @default(now())
+
+  business Business   @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user     User       @relation(fields: [userId], references: [id])
+  items    SaleItem[]
+
+  @@index([businessId])
+  @@index([createdAt])
+}
+
+model SaleItem {
+  id        String @id @default(uuid())
+  saleId    String
+  productId String
+  quantity  Int
+  unitPrice Float
+
+  sale    Sale    @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([saleId])
+  @@index([productId])
+}
+
+model Alert {
+  id         String      @id @default(uuid())
+  businessId String
+  type       AlertType
+  severity   Severity
+  message    String
+  productId  String?
+  isRead     Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, isRead])
+}
+
+enum AlertType {
+  LOW_STOCK
+  SLOW_MOVING
+  DEMAND_SPIKE
+  RESTOCK_RECOMMENDATION
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model Forecast {
+  id              String   @id @default(uuid())
+  businessId      String
+  productId       String
+  forecastDate    DateTime
+  predictedDemand Float
+  confidence      Float
+  createdAt       DateTime @default(now())
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, forecastDate])
+  @@index([businessId])
+  @@index([productId])
+}
